@@ -16,7 +16,6 @@ class ChatController extends Controller
     public function index(): Factory|View|Application
     {
         auth()->loginUsingId(1);
-
         return view('chat');
     }
 
@@ -32,9 +31,7 @@ class ChatController extends Controller
         $message = $request->user()
             ->messages()
             ->create($request->validated());
-
         broadcast(new MessageSent($request->user(), $message));
-
         return $message;
     }
 }
